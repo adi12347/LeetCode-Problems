@@ -1,0 +1,40 @@
+class Solution {
+public:
+    string convert(int num)
+    {
+        string str="";
+        if(num==0)
+        {
+            str.push_back('0');
+            return str;
+        }
+        while(num)
+        {
+            str.push_back(num%10+'0');
+            num=num/10;
+        }
+        reverse(str.begin(),str.end());
+        return str;
+    }
+    int maximumSwap(int num) {
+        string str=convert(num);
+        for(int i=0;i<str.size();i++)
+        {
+            int maxi=i;
+            for(int j=str.size()-1;j>i;j--)
+            {
+                if(str[j]>str[maxi])
+                {
+                    maxi=j;
+                }
+            }
+            if(maxi!=i)
+            {
+                swap(str[maxi],str[i]);
+                break;
+            }
+        }
+        return stoi(str);
+        
+    }
+};
