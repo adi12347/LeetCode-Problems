@@ -1,0 +1,43 @@
+class Solution {
+public:
+    bool isValid(string str) {
+        stack<char> st;
+        bool flag=true;
+        int n=str.size();
+        for(int i=0;i<n;i++)
+        {
+            if(str[i]=='(' || str[i]=='[' || str[i]=='{')
+            {
+                st.push(str[i]);
+            }
+            else
+            {
+                if(st.empty()==true)
+                {
+                    flag=false;
+                }
+                else
+                {
+                    char a=st.top();
+                    st.pop();
+                    if(str[i]==')' && (a=='[' || a=='{'))
+                       {
+                           flag=false;
+                       }
+                     if(str[i]==']' && (a=='(' || a=='{'))
+                        {
+                            flag=false;
+                        }
+                      if(str[i]=='}' && (a=='[' || a=='('))
+                         {
+                             flag=false;
+                         }
+                }
+            }
+        }
+        if(st.empty()==false)
+            flag=false;
+        return flag;
+        
+    }
+};
