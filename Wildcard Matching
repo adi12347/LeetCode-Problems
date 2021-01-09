@@ -1,0 +1,37 @@
+class Solution {
+public:
+    bool isMatch(string s, string p) {
+        int i=0;
+        int j=0;
+        int m=s.size();
+        int n=p.size();
+        int match;
+        int ast=-1;
+        while(i<m)
+        {
+            if(j<n && p[j]=='*')
+            {
+                match=i;
+                ast=j++;
+            }
+            else if(j<n && (s[i]==p[j]) || p[j]=='?')
+            {
+                i++;
+                j++;
+            }
+            else if(ast>=0)
+            {
+                i=++match;
+                j=ast+1;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        while(j<n && p[j]=='*')
+            j++;
+        return j==n;
+        
+    }
+};
