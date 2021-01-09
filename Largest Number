@@ -1,0 +1,45 @@
+class Solution {
+public:
+    static string change(int num)
+    {
+        string str="";
+        if(num==0)
+        {
+            str.push_back('0');
+            return str;
+        }
+        while(num)
+        {
+            str.push_back(num%10+'0');
+            num=num/10;
+        }
+        reverse(str.begin(),str.end());
+        return str;
+    }
+    static bool mycmp(string x,string y)
+    {
+        string xy=x.append(y);
+        string yx=y.append(x);
+        return xy.compare(yx)>0?1:0;
+        
+    }
+    string largestNumber(vector<int>& nums) {
+        vector<string> vec;
+        for(int i=0;i<nums.size();i++)
+        {
+            string str=change(nums[i]);
+            vec.push_back(str);
+        }
+        sort(vec.begin(),vec.end(),mycmp);
+        string str="";
+        for(int i=0;i<vec.size();i++)
+        {
+            str.append(vec[i]);
+        }
+        int pos=0;
+        while(str[pos]=='0' && pos+1<str.size())
+            pos++;
+        return str.substr(pos);
+        
+    }
+};
