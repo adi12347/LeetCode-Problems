@@ -1,0 +1,71 @@
+class Solution {
+public:
+    struct node
+    {
+        bool isleaf;
+        struct node *child[26];
+    };
+    int convert(char ch)
+    {
+        return int(ch)-'a';
+    }
+    struct node *getnode()
+    {
+        struct node *ptr=new node;
+        ptr->isleaf=false;
+        for(int i=0;i<26;i++)
+        {
+            ptr->child[i]=NULL;
+        }
+        return ptr;
+    }
+    void insert(struct node *root,string str)
+    {
+        int length=str.size();
+        struct node *temp=root;
+        for(int i=0;i<length;i++)
+        {
+            int index=convert(str[i]);
+            if(!temp->child[index])
+            {
+                temp->child[index]=getnode();
+            }
+            temp=temp->child[index];
+        }
+        temp->isleaf=true;
+    }
+    int count(struct node *root,int *ind)
+    {
+        int co=0;
+        for(int i=0;i<26;i++)
+        {
+            if(root->child[i]!=NULL)
+            {
+                co++;
+                *ind=i;
+            }
+        }
+        return co;
+    }
+    string walk(struct node *root)
+    {
+        string prefix="";
+        struct node *temp=root;
+        int i=0;
+        while(count(temp,&i)==1 && temp->isleaf==false)
+        {
+            temp=temp->child[i];
+            prefix.push_back('a'+i);
+        }
+        return prefix;
+    }
+    string longestCommonPrefix(vector<string>& strs) {
+        struct node *root=getnode();
+        for(int i=0;i<strs.size();i++)
+        {
+            insert(root,strs[i]);
+        }
+        return walk(root);
+        
+    }
+};
