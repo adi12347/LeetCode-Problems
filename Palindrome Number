@@ -1,0 +1,32 @@
+class Solution {
+public:
+    bool ispal(string str)
+    {
+        int low=0;
+        int high=str.size()-1;
+        while(low<high)
+        {
+            if(str[low]!=str[high])
+            {
+                return false;
+            }
+            low++;
+            high--;
+        }
+        return true;
+    }
+    bool isPalindrome(int x) {
+        if(x<0)
+            return false;
+        string str="";
+        while(x)
+        {
+            str.push_back(x%10+'0');
+            x=x/10;
+        }
+        if(ispal(str))
+            return true;
+        return false;
+        
+    }
+};
