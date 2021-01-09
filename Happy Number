@@ -1,0 +1,27 @@
+class Solution {
+public:
+    static int square_sum(int n)
+    {
+        int sum=0;
+        while(n)
+        {
+            sum=sum+(n%10)*(n%10);
+            n=n/10;
+        }
+        return sum;
+    }
+    bool isHappy(int n) {
+        int count=0;
+        while(1)
+        {
+            n=square_sum(n);
+            if(n==1)
+                return true;
+            count++;
+            if(count>1000)
+                break;
+        }
+        return false;
+        
+    }
+};
