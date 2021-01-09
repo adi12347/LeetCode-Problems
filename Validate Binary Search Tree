@@ -1,0 +1,34 @@
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    bool is_bst(struct TreeNode *root,struct TreeNode **prev)
+    {
+        if(root)
+        {
+            if(!is_bst(root->left,prev))
+            {
+                return false;
+            }
+            if((*prev) && (*prev)->val>=root->val)
+            {
+               return false; 
+            }
+            *prev=root;
+            return is_bst(root->right,prev);
+        }
+        return true;
+    }
+    bool isValidBST(TreeNode* root) {
+        struct TreeNode *prev=NULL;
+        return is_bst(root,&prev);
+        
+    }
+};
