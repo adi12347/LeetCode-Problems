@@ -1,0 +1,21 @@
+
+      class Solution {
+public:
+    int findPeakElement(vector<int>& nums) {
+        int length = nums.size();
+        int right = length - 1, left = 0;
+        
+        while(left < right)
+        {
+            int middle = (left + right)/2;
+            int middlePlusOne = middle+1;
+            
+            if(nums[middle] >=nums[middlePlusOne])
+                right = middle;
+            else
+                left = middlePlusOne;
+        }
+        return left;
+    }
+};  
+    
