@@ -1,0 +1,11 @@
+class Solution {
+public:
+    int uniquePaths(int m, int n) {
+        long long int res=1;
+        for(int i=n;i<m+n-1;i++)
+        {
+            res=(res*i)/(i-n+1);
+        }
+        return res;
+    }
+};
